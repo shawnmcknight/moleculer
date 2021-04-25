@@ -1,9 +1,11 @@
 import { EventEmitter2 } from "eventemitter2";
 import Cachers from "./src/cachers";
+import Loggers from "./src/loggers";
 
 export * as Cachers from "./src/cachers";
 export { CacherOptions, MemoryCacherOptions, MemoryLRUCacherOptions, RedisCacherOptions } from "./src/cachers";
 
+export * as Loggers from "./src/loggers";
 
 /**
  * Moleculer uses global.Promise as the default promise library
@@ -982,18 +984,6 @@ export interface ServiceSearchObj {
 
 export interface MoleculerRepl extends Vorpal{
 	removeIfExist(command:string): void;
-}
-
-
-
-export namespace Loggers {
-	export class Base {
-		constructor(opts?: Record<string, any>);
-		init(loggerFactory: LoggerFactory): void
-		stop(): void;
-		getLogLevel(mod: string): string
-		getLogHandler(bindings: Record<string, any>): Record<string, any>
-	}
 }
 
 export class ServiceBroker {
