@@ -2,6 +2,7 @@ import { EventEmitter2 } from "eventemitter2";
 import Cachers from "./src/cachers";
 import Loggers from "./src/loggers";
 import { Base as Serializer } from "./src/serializers";
+import { Base as BaseStrategy } from "./src/strategies";
 import { Base as BaseValidator } from "./src/validators";
 
 export * as Cachers from "./src/cachers";
@@ -10,6 +11,8 @@ export { CacherOptions, MemoryCacherOptions, MemoryLRUCacherOptions, RedisCacher
 export * as Loggers from "./src/loggers";
 
 export * as Serializers from "./src/serializers";
+
+export * as Strategies from "./src/strategies";
 
 export * as Validators from "./src/validators";
 export { Fastest as Validator } from "./src/validators"; // deprecated
@@ -1186,27 +1189,7 @@ export class Transporter {
 
 export type Cacher<T extends Cachers.Base = Cachers.Base> = T;
 
-export abstract class BaseStrategy {
-	constructor(registry:ServiceRegistry, broker:ServiceBroker, opts?:object);
-	select(list: any[], ctx?: Context): Endpoint;
-}
-
 export type ValidatorNames = "Fastest"
-
-export class RoundRobinStrategy extends BaseStrategy {}
-export class RandomStrategy extends BaseStrategy {}
-export class CpuUsageStrategy extends BaseStrategy {}
-export class LatencyStrategy extends BaseStrategy {}
-export class ShardStrategy extends BaseStrategy {}
-
-export namespace Strategies {
-	export class Base extends BaseStrategy {}
-	export class RoundRobin extends RoundRobinStrategy {}
-	export class Random extends RandomStrategy {}
-	export class CpuUsage extends CpuUsageStrategy {}
-	export class Latency extends LatencyStrategy {}
-	export class Shard extends ShardStrategy {}
-}
 
 export abstract class BaseDiscoverer {
 	constructor(opts?:DiscovererOptions);
