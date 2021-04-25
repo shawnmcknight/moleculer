@@ -5,8 +5,8 @@ export interface MemoryLRUCacherOptions extends MemoryCacherOptions {
 	max?: number;
 }
 
-declare class MemoryLRU extends BaseCacher {
+declare class MemoryLRUCacher extends BaseCacher {
 	constructor(opts?: MemoryLRUCacherOptions);
 	opts: MemoryLRUCacherOptions;
 }
-export default MemoryLRU;
+export default MemoryLRUCacher;

@@ -7,11 +7,11 @@ export interface RedisCacherOptions extends CacherOptions {
 	monitor?: boolean;
 }
 
-declare class Redis<C = any> extends BaseCacher {
+declare class RedisCacher<C = any> extends BaseCacher {
 	constructor(opts?: string | RedisCacherOptions);
 	opts: RedisCacherOptions;
 
 	client: C;
 	prefix: string | null;
 }
-export default Redis;
+export default RedisCacher;

@@ -5,7 +5,7 @@ export interface CacherOptions {
 	[key: string]: any;
 }
 
-declare class Base {
+declare abstract class BaseCacher {
 	constructor(opts?: CacherOptions);
 	opts: CacherOptions;
 	init(broker: ServiceBroker): void;
@@ -18,4 +18,4 @@ declare class Base {
 	getCacheKey(actionName: string, params: object, meta: object, keys: Array<string> | null) : string;
 	defaultKeygen(actionName: string, params: object | null, meta: object | null, keys: Array<string> | null): string;
 }
-export default Base;
+export default BaseCacher;
