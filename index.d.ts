@@ -7,6 +7,8 @@ export { CacherOptions, MemoryCacherOptions, MemoryLRUCacherOptions, RedisCacher
 
 export * as Loggers from "./src/loggers";
 
+export * as Validators from "./src/validators";
+
 /**
  * Moleculer uses global.Promise as the default promise library
  * If you are using a third-party promise library (e.g. Bluebird), you will need to
@@ -1272,11 +1274,6 @@ export namespace Discoverers {
 export interface ValidatorOptions {
 	type: string,
 	options?: Record<string, any>
-}
-
-export namespace Validators {
-	export class Base extends BaseValidator {}
-	export class Fastest extends BaseValidator {}
 }
 
 export namespace Transporters {
