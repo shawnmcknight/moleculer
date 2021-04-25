@@ -1,4 +1,4 @@
-import Base from "./base";
+import BaseSerializer from "./base";
 
-declare class MsgPack extends Base {};
-export default MsgPack;
+declare class MsgPackSerializer extends Base {};
+export default MsgPackSerializer;

@@ -1,4 +1,4 @@
-import Base from "./base";
+import BaseSerializer from "./base";
 
-declare class Avro extends Base {};
-export default Avro;
+declare class AvroSerializer extends BaseSerializer {};
+export default AvroSerializer;

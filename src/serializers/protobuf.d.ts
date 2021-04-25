@@ -1,4 +1,4 @@
-import Base from "./base";
+import BaseSerializer from "./base";
 
-declare class ProtoBuf extends Base {};
-export default ProtoBuf;
+declare class ProtoBufSerializer extends BaseSerializer {};
+export default ProtoBufSerializer;

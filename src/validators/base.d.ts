@@ -1,4 +1,4 @@
-declare class Base {
+declare abstract class BaseValidator {
 	constructor();
 	init(broker: ServiceBroker): void;
 	compile(schema: Record<string, any>): Function;
@@ -6,4 +6,4 @@ declare class Base {
 	middleware(): ((handler: ActionHandler, action: ActionSchema) => any);
 	convertSchemaToMoleculer(schema: any): Record<string, any>;
 }
-export default Base;
+export default BaseValidator;

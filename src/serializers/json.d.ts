@@ -1,4 +1,4 @@
-import Base from "./base";
+import BaseSerializer from "./base";
 
-declare class JSON extends Base {};
-export default JSON;
+declare class JSONSerializer extends BaseSerializer {};
+export default JSONSerializer;

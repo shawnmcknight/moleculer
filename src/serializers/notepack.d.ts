@@ -1,4 +1,4 @@
-import Base from "./base";
+import BaseSerializer from "./base";
 
-declare class Notepack extends Base {};
-export default Notepack;
+declare class NotepackSerializer extends BaseSerializer {};
+export default NotepackSerializer;

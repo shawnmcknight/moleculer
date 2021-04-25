@@ -1,4 +1,4 @@
-import Base from "./base";
+import BaseSerializer from "./base";
 
-declare class CBOR extends Base {};
-export default CBOR;
+declare class CBORSerializer extends BaseSerializer {};
+export default CBORSerializer;

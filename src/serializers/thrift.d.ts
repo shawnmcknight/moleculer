@@ -1,4 +1,4 @@
-import Base from "./base";
+import BaseSerializer from "./base";
 
-declare class Thrift extends Base {};
-export default Thrift;
+declare class ThriftSerializer extends BaseSerializer {};
+export default ThriftSerializer;
