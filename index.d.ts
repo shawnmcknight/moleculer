@@ -2,6 +2,7 @@ import { EventEmitter2 } from "eventemitter2";
 import Cachers from "./src/cachers";
 import Loggers from "./src/loggers";
 import { Base as Serializer } from "./src/serializers";
+import { Base as BaseValidator } from "./src/validators";
 
 export * as Cachers from "./src/cachers";
 export { CacherOptions, MemoryCacherOptions, MemoryLRUCacherOptions, RedisCacherOptions } from "./src/cachers";
@@ -11,6 +12,7 @@ export * as Loggers from "./src/loggers";
 export * as Serializers from "./src/serializers";
 
 export * as Validators from "./src/validators";
+export { Fastest as Validator } from "./src/validators"; // deprecated
 
 /**
  * Moleculer uses global.Promise as the default promise library
@@ -1183,17 +1185,6 @@ export class Transporter {
 }
 
 export type Cacher<T extends Cachers.Base = Cachers.Base> = T;
-
-export class BaseValidator {
-	constructor();
-	init(broker: ServiceBroker): void;
-	compile(schema: Record<string, any>): Function;
-	validate(params: Record<string, any>, schema: Record<string, any>): boolean;
-	middleware(): ((handler: ActionHandler, action: ActionSchema) => any);
-	convertSchemaToMoleculer(schema: any): Record<string, any>;
-}
-
-export class Validator extends BaseValidator {} // deprecated
 
 export abstract class BaseStrategy {
 	constructor(registry:ServiceRegistry, broker:ServiceBroker, opts?:object);
