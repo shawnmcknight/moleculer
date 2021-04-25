@@ -1,11 +1,14 @@
 import { EventEmitter2 } from "eventemitter2";
 import Cachers from "./src/cachers";
 import Loggers from "./src/loggers";
+import { Base as Serializer } from "./src/serializers";
 
 export * as Cachers from "./src/cachers";
 export { CacherOptions, MemoryCacherOptions, MemoryLRUCacherOptions, RedisCacherOptions } from "./src/cachers";
 
 export * as Loggers from "./src/loggers";
+
+export * as Serializers from "./src/serializers";
 
 export * as Validators from "./src/validators";
 
@@ -1180,25 +1183,6 @@ export class Transporter {
 }
 
 export type Cacher<T extends Cachers.Base = Cachers.Base> = T;
-
-export class Serializer {
-	constructor(opts?: any);
-	init(broker: ServiceBroker): void;
-	serialize(obj: Record<string, any>, type: string): Buffer;
-	deserialize(buf: Buffer, type: string): Record<string, any>;
-}
-
-export const Serializers: {
-	Base: Serializer,
-	JSON: Serializer,
-	Avro: Serializer,
-	CBOR: Serializer,
-	MsgPack: Serializer,
-	ProtoBuf: Serializer,
-	Thrift: Serializer,
-	Notepack: Serializer,
-	resolve: (type: string | Record<string, any> | Serializer) => Serializer,
-};
 
 export class BaseValidator {
 	constructor();
