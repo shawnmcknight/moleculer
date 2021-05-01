@@ -4,6 +4,7 @@ import Loggers from "./src/loggers";
 import { Base as Serializer } from "./src/serializers";
 import { Base as BaseStrategy } from "./src/strategies";
 import { Base as Transporter } from "./src/transporters";
+import { Base as BaseTraceExporter } from "./src/tracing/exporters";
 import { Base as BaseValidator } from "./src/validators";
 
 export * as Cachers from "./src/cachers";
@@ -16,6 +17,8 @@ export * as Serializers from "./src/serializers";
 export * as Strategies from "./src/strategies";
 
 export * as Transporters from "./src/transporters";
+
+export * as TracerExporters from "./src/tracing/exporters";
 
 export * as Validators from "./src/validators";
 export { Fastest as Validator } from "./src/validators"; // deprecated
@@ -203,31 +206,6 @@ export interface TracingActionOptions extends TracingOptions {
 
 export interface TracingEventOptions extends TracingOptions {
 	tags?: TracingEventTags;
-}
-
-export class BaseTraceExporter {
-	opts: Record<string, any>;
-	tracer: Tracer;
-	logger: LoggerInstance;
-
-	constructor(opts: Record<string, any>);
-	init(tracer: Tracer): void;
-
-	spanStarted(span: Span): void;
-	spanFinished(span: Span): void;
-
-	flattenTags(obj: Record<string, any>, convertToString?: boolean, path?: string): Record<string, any>;
-	errorToObject(err: Error): Record<string, any>;
-}
-
-export namespace TracerExporters {
-	export class Base extends BaseTraceExporter {}
-	export class Console extends BaseTraceExporter {}
-	export class Datadog extends BaseTraceExporter {}
-	export class Event extends BaseTraceExporter {}
-	export class EventLegacy extends BaseTraceExporter {}
-	export class Jaeger extends BaseTraceExporter {}
-	export class Zipkin extends BaseTraceExporter {}
 }
 
 export interface MetricsReporterOptions {
