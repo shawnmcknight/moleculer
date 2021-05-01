@@ -1,4 +1,4 @@
 import { BaseTraceExporter } from "./base";
 
-declare class NewRelicTraceExporter extends BaseTraceExporter {};
+declare class NewRelicTraceExporter extends BaseTraceExporter {}
 export default NewRelicTraceExporter;

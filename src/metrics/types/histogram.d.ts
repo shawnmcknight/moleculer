@@ -10,14 +10,14 @@ export interface HistogramMetricSnapshot {
 		[key: string]: number;
 	};
 
-	min?: number | null,
-	mean?: number | null,
-	variance?: number | null,
-	stdDev?: number | null,
-	max?: number | null,
+	min?: number | null;
+	mean?: number | null;
+	variance?: number | null;
+	stdDev?: number | null;
+	max?: number | null;
 	quantiles?: {
 		[key: string]: number;
-	}
+	};
 }
 
 declare class HistogramMetric extends BaseMetric {
