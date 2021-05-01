@@ -1,6 +1,7 @@
 import { EventEmitter2 } from "eventemitter2";
 import Cachers from "./src/cachers";
 import Loggers from "./src/loggers";
+import { MetricBaseReporter } from "./src/metrics/reporters";
 import { BaseMetricPOJO } from "./src/metrics/types";
 import { Base as Serializer } from "./src/serializers";
 import { Base as BaseStrategy } from "./src/strategies";
@@ -12,6 +13,9 @@ export * as Cachers from "./src/cachers";
 export { CacherOptions, MemoryCacherOptions, MemoryLRUCacherOptions, RedisCacherOptions } from "./src/cachers";
 
 export * as Loggers from "./src/loggers";
+
+export * as MetricReporters from "./src/metrics/reporters";
+export { MetricReporterOptions } from "./src/metrics/reporters";
 
 export * as MetricTypes from "./src/metrics/types";
 export {
@@ -272,41 +276,6 @@ export class MetricRegistry {
 	changed(metric: BaseMetric, value: any | null, labels?: Record<string, any>, timestamp?: number): void;
 
 	list(opts?: MetricListOptions): Array<BaseMetricPOJO>;
-}
-
-export interface MetricReporterOptions {
-	includes?: string | Array<string>;
-	excludes?: string | Array<string>;
-
-	metricNamePrefix?: string;
-	metricNameSuffix?: string;
-
-	metricNameFormatter?: (name: string) => string;
-	labelNameFormatter?: (name: string) => string;
-
-	[key: string]: any;
-}
-
-export class MetricBaseReporter {
-	opts: MetricReporterOptions;
-
-	constructor(opts: MetricReporterOptions);
-	init(registry: MetricRegistry): void;
-
-	matchMetricName(name: string): boolean;
-	formatMetricName(name: string): string;
-	formatLabelName(name: string): string;
-	metricChanged(metric: BaseMetric, value: any, labels?: Record<string, any>, timestamp?: number): void;
-}
-
-export namespace MetricReporters {
-	export class Base extends MetricBaseReporter {}
-	export class Console extends MetricBaseReporter {}
-	export class CSV extends MetricBaseReporter {}
-	export class Event extends MetricBaseReporter {}
-	export class Datadog extends MetricBaseReporter {}
-	export class Prometheus extends MetricBaseReporter {}
-	export class StatsD extends MetricBaseReporter {}
 }
 
 export interface BulkheadOptions {
