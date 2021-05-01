@@ -43,6 +43,8 @@ export * as Transporters from "./src/transporters";
 
 export * as TracerExporters from "./src/tracing/exporters";
 
+export * as Utils from "./src/utils";
+
 export * as Validators from "./src/validators";
 export { Fastest as Validator } from "./src/validators"; // deprecated
 
