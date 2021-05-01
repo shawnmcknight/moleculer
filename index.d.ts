@@ -3,6 +3,7 @@ import Cachers from "./src/cachers";
 import Loggers from "./src/loggers";
 import { Base as Serializer } from "./src/serializers";
 import { Base as BaseStrategy } from "./src/strategies";
+import { Base as Transporter } from "./src/transporters";
 import { Base as BaseValidator } from "./src/validators";
 
 export * as Cachers from "./src/cachers";
@@ -13,6 +14,8 @@ export * as Loggers from "./src/loggers";
 export * as Serializers from "./src/serializers";
 
 export * as Strategies from "./src/strategies";
+
+export * as Transporters from "./src/transporters";
 
 export * as Validators from "./src/validators";
 export { Fastest as Validator } from "./src/validators"; // deprecated
@@ -1156,37 +1159,6 @@ export namespace Packets {
 	}
 }
 
-export class Transporter {
-	constructor(opts?: Record<string, any>);
-	hasBuiltInBalancer: boolean;
-
-	init(transit: Transit, messageHandler: (cmd: string, msg: string) => void, afterConnect: (wasReconnect: boolean) => void): void;
-	connect(): Promise<any>;
-	disconnect(): Promise<any>;
-	onConnected(wasReconnect?: boolean): Promise<any>;
-
-	makeSubscriptions(topics: Array<Record<string, any>>): Promise<void>;
-	subscribe(cmd: string, nodeID?: string): Promise<void>;
-	subscribeBalancedRequest(action: string): Promise<void>;
-	subscribeBalancedEvent(event: string, group: string): Promise<void>;
-	unsubscribeFromBalancedCommands(): Promise<void>;
-
-	incomingMessage(cmd: string, msg: Buffer): Promise<void>;
-	receive(cmd: string, data: Buffer): Promise<void>;
-
-	prepublish(packet: Packet): Promise<void>;
-	publish(packet: Packet): Promise<void>;
-	publishBalancedEvent(packet: Packet, group: string): Promise<void>;
-	publishBalancedRequest(packet: Packet): Promise<void>;
-	send(topic: string, data: Buffer, meta: Record<string, any>): Promise<void>;
-
-	getTopicName(cmd: string, nodeID?: string): string;
-	makeBalancedSubscriptions(): Promise<void>;
-
-	serialize(packet: Packet): Buffer;
-	deserialize(type: string, data: Buffer): Packet;
-}
-
 export type Cacher<T extends Cachers.Base = Cachers.Base> = T;
 
 export type ValidatorNames = "Fastest"
@@ -1232,18 +1204,6 @@ export namespace Discoverers {
 export interface ValidatorOptions {
 	type: string,
 	options?: Record<string, any>
-}
-
-export namespace Transporters {
-	export class Base extends Transporter {}
-	export class Fake extends Base { }
-	export class NATS extends Base { }
-	export class MQTT extends Base { }
-	export class Redis extends Base { }
-	export class AMQP extends Base { }
-	export class Kafka extends Base { }
-	export class STAN extends Base { }
-	export class TCP extends Base { }
 }
 
 export namespace Errors {
