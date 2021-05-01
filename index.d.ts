@@ -15,6 +15,8 @@ import { Base as BaseValidator } from "./src/validators";
 export * as Cachers from "./src/cachers";
 export { CacherOptions, MemoryCacherOptions, MemoryLRUCacherOptions, RedisCacherOptions } from "./src/cachers";
 
+export * from "./src/constants";
+
 export * as Errors from "./src/errors";
 
 export * as Loggers from "./src/loggers";
@@ -1038,10 +1040,6 @@ export class AsyncStorage {
 	setSessionData(data: any): void;
 	getSessionData(): any | null;
 }
-
-export const CIRCUIT_CLOSE: string;
-export const CIRCUIT_HALF_OPEN: string;
-export const CIRCUIT_OPEN: string;
 
 export class Vorpal {
 	parse(argv: ReadonlyArray<string>): this;
