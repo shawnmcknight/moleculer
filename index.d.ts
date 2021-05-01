@@ -8,6 +8,7 @@ import { MetricBaseReporter } from "./src/metrics/reporters";
 import { BaseMetricPOJO } from "./src/metrics/types";
 import { DiscovererOptions } from "./src/registry/discoverers";
 import { Base as Serializer } from "./src/serializers";
+import ServiceBroker from "./src/service-broker";
 import { Base as BaseStrategy } from "./src/strategies";
 import { Base as Transporter } from "./src/transporters";
 import { Base as BaseTraceExporter } from "./src/tracing/exporters";
@@ -39,6 +40,8 @@ export {
 export * as Discoverers from "./src/registry/discoverers";
 
 export * as Serializers from "./src/serializers";
+
+export { default as ServiceBroker } from "./src/service-broker";
 
 export * as Strategies from "./src/strategies";
 
@@ -776,116 +779,6 @@ export interface ServiceSearchObj {
 
 export interface MoleculerRepl extends Vorpal{
 	removeIfExist(command:string): void;
-}
-
-export class ServiceBroker {
-	constructor(options?: BrokerOptions);
-
-	options: BrokerOptions;
-
-	Promise: PromiseConstructorLike;
-	ServiceFactory: typeof Service;
-	ContextFactory: typeof Context;
-
-	started: boolean;
-
-	namespace: string;
-	nodeID: string;
-	instanceID: string;
-
-	logger: LoggerInstance;
-
-	services: Array<Service>;
-
-	localBus: EventEmitter2;
-
-	scope: AsyncStorage;
-	metrics: MetricRegistry;
-
-	middlewares: MiddlewareHandler;
-
-	registry: ServiceRegistry;
-
-	cacher?: Cacher;
-	serializer?: Serializer;
-	validator?: BaseValidator;
-
-	tracer: Tracer;
-
-	transit?: Transit;
-
-	start(): Promise<void>;
-	stop(): Promise<void>;
-
-	repl(): MoleculerRepl;
-
-	errorHandler(err: Error, info: Record<string, any>): void;
-
-	wrapMethod(method: string, handler: ActionHandler, bindTo: any, opts: MiddlewareCallHandlerOptions): typeof handler;
-	callMiddlewareHookSync(name: string, args: any[], opts: MiddlewareCallHandlerOptions): Promise<void>;
-	callMiddlewareHook(name: string, args: any[], opts: MiddlewareCallHandlerOptions): void;
-
-	isMetricsEnabled(): boolean;
-	isTracingEnabled(): boolean;
-
-	getLogger(module: string, props?: Record<string, any>): LoggerInstance;
-	fatal(message: string, err?: Error, needExit?: boolean): void;
-
-	loadServices(folder?: string, fileMask?: string): number;
-	loadService(filePath: string): Service;
-	createService(schema: ServiceSchema, schemaMods?: ServiceSchema): Service;
-	destroyService(service: Service | string | ServiceSearchObj): Promise<void>;
-
-	getLocalService(name: string | ServiceSearchObj): Service;
-	waitForServices(serviceNames: string | Array<string> | Array<ServiceSearchObj>, timeout?: number, interval?: number, logger?: LoggerInstance): Promise<void>;
-
-	findNextActionEndpoint(actionName: string, opts?: Record<string, any>, ctx?: Context): ActionEndpoint | MoleculerRetryableError;
-
-	call<T>(actionName: string): Promise<T>;
-	call<T, P>(actionName: string, params: P, opts?: CallingOptions): Promise<T>;
-
-	mcall<T>(def: Array<MCallDefinition> | { [name: string]: MCallDefinition }, opts?: CallingOptions): Promise<Array<T> | T>;
-
-	emit<D>(eventName: string, data: D, opts: Record<string, any>): Promise<void>;
-	emit<D>(eventName: string, data: D, groups: Array<string>): Promise<void>;
-	emit<D>(eventName: string, data: D, groups: string): Promise<void>;
-	emit<D>(eventName: string, data: D): Promise<void>;
-	emit(eventName: string): Promise<void>;
-
-	broadcast<D>(eventName: string, data: D, opts: Record<string, any>): Promise<void>;
-	broadcast<D>(eventName: string, data: D, groups: Array<string>): Promise<void>;
-	broadcast<D>(eventName: string, data: D, groups: string): Promise<void>;
-	broadcast<D>(eventName: string, data: D): Promise<void>;
-	broadcast(eventName: string): Promise<void>;
-
-	broadcastLocal<D>(eventName: string, data: D, opts: Record<string, any>): Promise<void>;
-	broadcastLocal<D>(eventName: string, data: D, groups: Array<string>): Promise<void>;
-	broadcastLocal<D>(eventName: string, data: D, groups: string): Promise<void>;
-	broadcastLocal<D>(eventName: string, data: D): Promise<void>;
-	broadcastLocal(eventName: string): Promise<void>;
-
-	ping(): Promise<PongResponses>;
-	ping(nodeID: string | Array<string>, timeout?: number): Promise<PongResponse>;
-
-	getHealthStatus(): NodeHealthStatus;
-	getLocalNodeInfo(): BrokerNode;
-
-	getCpuUsage(): Promise<any>;
-	generateUid(): string;
-
-	hasEventListener(eventName: string): boolean;
-	getEventListener(eventName: string): Array<EventEndpoint>;
-
-	getConstructorName(obj: any): string;
-
-	MOLECULER_VERSION: string;
-	PROTOCOL_VERSION: string;
-	[name: string]: any;
-
-	static MOLECULER_VERSION: string;
-	static PROTOCOL_VERSION: string;
-	static defaultOptions: BrokerOptions;
-	static Promise: PromiseConstructorLike;
 }
 
 export type Cacher<T extends Cachers.Base = Cachers.Base> = T;
