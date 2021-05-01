@@ -2,6 +2,7 @@ import { EventEmitter2 } from "eventemitter2";
 import Cachers from "./src/cachers";
 import { MoleculerError, MoleculerRetryableError } from "./src/errors";
 import Loggers from "./src/loggers";
+import { Packet } from "./src/packets";
 import { MetricBaseReporter } from "./src/metrics/reporters";
 import { BaseMetricPOJO } from "./src/metrics/types";
 import { Base as Serializer } from "./src/serializers";
@@ -952,56 +953,6 @@ export class ServiceBroker {
 	static PROTOCOL_VERSION: string;
 	static defaultOptions: BrokerOptions;
 	static Promise: PromiseConstructorLike;
-}
-
-export class Packet {
-	constructor(type: string, target: string, payload?: any);
-}
-
-export namespace Packets {
-	export type PROTOCOL_VERSION = "4";
-	export type PACKET_UNKNOWN = "???";
-	export type PACKET_EVENT = "EVENT";
-	export type PACKET_REQUEST = "REQ";
-	export type PACKET_RESPONSE = "RES";
-	export type PACKET_DISCOVER = "DISCOVER";
-	export type PACKET_INFO = "INFO";
-	export type PACKET_DISCONNECT = "DISCONNECT";
-	export type PACKET_HEARTBEAT = "HEARTBEAT";
-	export type PACKET_PING = "PING";
-	export type PACKET_PONG = "PONG";
-
-	export type PACKET_GOSSIP_REQ = "GOSSIP_REQ";
-	export type PACKET_GOSSIP_RES = "GOSSIP_RES";
-	export type PACKET_GOSSIP_HELLO = "GOSSIP_HELLO";
-
-	const PROTOCOL_VERSION: PROTOCOL_VERSION;
-	const PACKET_UNKNOWN: PACKET_UNKNOWN;
-	const PACKET_EVENT: PACKET_EVENT;
-	const PACKET_REQUEST: PACKET_REQUEST;
-	const PACKET_RESPONSE: PACKET_RESPONSE;
-	const PACKET_DISCOVER: PACKET_DISCOVER;
-	const PACKET_INFO: PACKET_INFO;
-	const PACKET_DISCONNECT: PACKET_DISCONNECT;
-	const PACKET_HEARTBEAT: PACKET_HEARTBEAT;
-	const PACKET_PING: PACKET_PING;
-	const PACKET_PONG: PACKET_PONG;
-
-	const PACKET_GOSSIP_REQ: PACKET_GOSSIP_REQ;
-	const PACKET_GOSSIP_RES: PACKET_GOSSIP_RES;
-	const PACKET_GOSSIP_HELLO: PACKET_GOSSIP_HELLO;
-
-	export interface PacketPayload {
-		ver: PROTOCOL_VERSION;
-		sender: string | null;
-	}
-
-	export interface Packet {
-		type: PACKET_UNKNOWN | PACKET_EVENT | PACKET_DISCONNECT | PACKET_DISCOVER |
-		PACKET_INFO | PACKET_HEARTBEAT | PACKET_REQUEST | PACKET_PING | PACKET_PONG | PACKET_RESPONSE | PACKET_GOSSIP_REQ | PACKET_GOSSIP_RES | PACKET_GOSSIP_HELLO;
-		target?: string;
-		payload: PacketPayload
-	}
 }
 
 export type Cacher<T extends Cachers.Base = Cachers.Base> = T;
