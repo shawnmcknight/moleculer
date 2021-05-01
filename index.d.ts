@@ -1,6 +1,7 @@
 import { EventEmitter2 } from "eventemitter2";
 import Cachers from "./src/cachers";
 import Loggers from "./src/loggers";
+import { BaseMetricPOJO } from "./src/metrics/types";
 import { Base as Serializer } from "./src/serializers";
 import { Base as BaseStrategy } from "./src/strategies";
 import { Base as Transporter } from "./src/transporters";
@@ -11,6 +12,15 @@ export * as Cachers from "./src/cachers";
 export { CacherOptions, MemoryCacherOptions, MemoryLRUCacherOptions, RedisCacherOptions } from "./src/cachers";
 
 export * as Loggers from "./src/loggers";
+
+export * as MetricTypes from "./src/metrics/types";
+export {
+	BaseMetricOptions,
+	BaseMetricPOJO,
+	GaugeMetricSnapshot,
+	HistogramMetricSnapshot,
+	InfoMetricSnapshot
+} from "./src/metrics/types";
 
 export * as Serializers from "./src/serializers";
 
@@ -226,121 +236,6 @@ export interface MetricRegistryOptions {
 }
 
 export type MetricSnapshot = GaugeMetricSnapshot | InfoMetricSnapshot | HistogramMetricSnapshot;
-export interface BaseMetricPOJO {
-	type: string;
-	name: string;
-	description?: string;
-	labelNames: Array<string>;
-	unit?: string;
-	values: Array<MetricSnapshot>;
-}
-
-export class BaseMetric {
-	type: string;
-	name: string;
-	description?: string;
-	labelNames: Array<string>;
-	unit?: string;
-	aggregator: string;
-
-	lastSnapshot: Record<string, any> | null;
-	dirty: boolean;
-	values: Map<String, Record<string, any>>;
-
-	constructor(opts: BaseMetricOptions, registry: MetricRegistry);
-	setDirty(): void;
-	clearDirty(): void;
-	get(labels?: Record<string, any>): Record<string, any> | null;
-	reset(labels?: Record<string, any>, timestamp?: number): Record<string, any> | null;
-	resetAll(timestamp?: number): Record<string, any> | null;
-	clear(): void;
-	hashingLabels(labels?: Record<string, any>): string;
-	snapshot(): Array<MetricSnapshot>;
-	generateSnapshot(): Array<MetricSnapshot>;
-	changed(value: any | null, labels?: Record<string, any>, timestamp?: number): void;
-	toObject(): BaseMetricPOJO;
-}
-
-export interface GaugeMetricSnapshot {
-	value: number;
-	labels: Record<string, any>;
-	timestamp: number;
-}
-
-export class GaugeMetric extends BaseMetric {
-	increment(labels?: Record<string, any>, value?: number, timestamp?: number): void;
-	decrement(labels?: Record<string, any>, value?: number, timestamp?: number): void;
-	set(value: number, labels?: Record<string, any>, timestamp?: number): void;
-	generateSnapshot(): Array<GaugeMetricSnapshot>;
-}
-
-export class CounterMetric extends BaseMetric {
-	increment(labels?: Record<string, any>, value?: number, timestamp?: number): void;
-	set(value: number, labels?: Record<string, any>, timestamp?: number): void;
-	generateSnapshot(): Array<GaugeMetricSnapshot>;
-}
-
-export interface InfoMetricSnapshot {
-	value: any;
-	labels: Record<string, any>;
-	timestamp: number;
-}
-
-export class InfoMetric extends BaseMetric {
-	set(value: any | null, labels?: Record<string, any>, timestamp?: number): void;
-	generateSnapshot(): Array<InfoMetricSnapshot>;
-}
-
-export interface HistogramMetricSnapshot {
-	labels: Record<string, any>;
-	count: number;
-	sum: number;
-	timestamp: number;
-
-	buckets?: {
-		[key: string]: number;
-	};
-
-	min?: number | null,
-	mean?: number | null,
-	variance?: number | null,
-	stdDev?: number | null,
-	max?: number | null,
-	quantiles?: {
-		[key: string]: number;
-	}
-}
-
-export class HistogramMetric extends BaseMetric {
-	buckets: Array<number>;
-	quantiles: Array<number>;
-	maxAgeSeconds?: number;
-	ageBuckets?: number;
-
-	observe(value: number, labels?: Record<string, any>, timestamp?: number): void;
-	generateSnapshot(): Array<HistogramMetricSnapshot>;
-
-	static generateLinearBuckets(start: number, width: number, count: number): Array<number>;
-	static generateExponentialBuckets(start: number, factor: number, count: number): Array<number>;
-}
-
-export namespace MetricTypes {
-	export class Base extends BaseMetric {}
-	export class Counter extends CounterMetric {}
-	export class Gauge extends GaugeMetric {}
-	export class Histogram extends HistogramMetric {}
-	export class Info extends InfoMetric {}
-}
-
-export interface BaseMetricOptions {
-	type: string;
-	name: string;
-	description?: string;
-	labelNames?: Array<string>;
-	unit?: string;
-	aggregator?: string;
-	[key: string]: unknown;
-}
 
 export interface MetricListOptions {
 	type: string | Array<string>;
