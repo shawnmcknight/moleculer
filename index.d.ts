@@ -5,6 +5,7 @@ import Loggers from "./src/loggers";
 import { Packet } from "./src/packets";
 import { MetricBaseReporter } from "./src/metrics/reporters";
 import { BaseMetricPOJO } from "./src/metrics/types";
+import { DiscovererOptions } from "./src/registry/discoverers";
 import { Base as Serializer } from "./src/serializers";
 import { Base as BaseStrategy } from "./src/strategies";
 import { Base as Transporter } from "./src/transporters";
@@ -29,6 +30,8 @@ export {
 	HistogramMetricSnapshot,
 	InfoMetricSnapshot
 } from "./src/metrics/types";
+
+export * as Discoverers from "./src/registry/discoverers";
 
 export * as Serializers from "./src/serializers";
 
@@ -638,14 +641,6 @@ export interface RegistryDiscovererOptions {
 	options: DiscovererOptions
 }
 
-export interface DiscovererOptions extends Record<string, any>  {
-	heartbeatInterval?: number;
-	heartbeatTimeout?: number;
-	disableHeartbeatChecks?: boolean;
-	disableOfflineNodeRemoving?: boolean;
-	cleanOfflineNodesTimeout?: number;
-}
-
 export interface BrokerTransitOptions {
 	maxQueueSize?: number;
 	disableReconnect?: boolean;
@@ -958,44 +953,6 @@ export class ServiceBroker {
 export type Cacher<T extends Cachers.Base = Cachers.Base> = T;
 
 export type ValidatorNames = "Fastest"
-
-export abstract class BaseDiscoverer {
-	constructor(opts?:DiscovererOptions);
-
-	transit?: Transit;
-	localNode?: BrokerNode;
-
-	heartbeatTimer: NodeJS.Timeout;
-	checkNodesTimer: NodeJS.Timeout;
-	offlineTimer: NodeJS.Timeout;
-
-	init(registry: ServiceRegistry): void;
-
-	stop(): Promise<void>;
-	startHeartbeatTimers(): void;
-	stopHeartbeatTimers(): void;
-	disableHeartbeat(): void;
-	beat(): Promise<void>;
-	checkRemoteNodes(): void;
-	checkOfflineNodes(): void;
-	heartbeatReceived(nodeID:string, payload:Record<string, any>): void;
-	processRemoteNodeInfo(nodeID:string, payload:Record<string, any>): BrokerNode;
-	sendHeartbeat(): Promise<void>;
-	discoverNode(nodeID: string): Promise<BrokerNode | void>;
-	discoverAllNodes(): Promise<BrokerNode[] | void>;
-	localNodeReady(): Promise<void>;
-	sendLocalNodeInfo(nodeID: string): Promise<void>;
-	localNodeDisconnected(): Promise<void>;
-	remoteNodeDisconnected(nodeID:string, isUnexpected:boolean): void;
-
-}
-
-export namespace Discoverers {
-	export class Base extends BaseDiscoverer {}
-	export class Local extends BaseDiscoverer {}
-	export class Redis extends BaseDiscoverer {}
-	export class Etcd3 extends BaseDiscoverer {}
-}
 
 export interface ValidatorOptions {
 	type: string,
