@@ -545,10 +545,3 @@ export interface ValidatorOptions {
 	type: string,
 	options?: Record<string, any>
 }
-
-export interface ActionCatalogListOptions {
-	onlyLocal?:boolean;
-	onlyAvailable?:boolean;
-	skipInternal?:boolean;
-	withEndpoints?:boolean;
-}

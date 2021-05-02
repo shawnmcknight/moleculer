@@ -1,5 +1,12 @@
 import { Logger } from "../logger-factory";
 
+export interface ActionCatalogListOptions {
+	onlyLocal?: boolean;
+	onlyAvailable?: boolean;
+	skipInternal?: boolean;
+	withEndpoints?: boolean;
+}
+
 declare class Registry {
 	broker: ServiceBroker;
 	metrics: MetricRegistry;
