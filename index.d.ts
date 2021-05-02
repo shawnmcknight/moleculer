@@ -68,16 +68,6 @@ export { Fastest as Validator } from "./src/validators"; // deprecated
 
 export type LogLevels = "fatal" | "error" | "warn" | "info" | "debug" | "trace";
 
-export class LoggerFactory {
-	constructor(broker: ServiceBroker);
-	init(opts: LoggerConfig | Array<LoggerConfig>): void;
-	stop(): void;
-	getLogger(bindings: Record<string, any>): LoggerInstance;
-	getBindingsKey(bindings: Record<string, any>): String;
-
-	broker: ServiceBroker;
-}
-
 export interface LoggerBindings {
 	nodeID: string;
 	ns: string;

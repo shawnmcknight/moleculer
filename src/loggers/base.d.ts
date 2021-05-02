@@ -1,3 +1,5 @@
+import { LoggerFactory } from "../logger-factory";
+
 declare abstract class BaseLogger {
 	constructor(opts?: Record<string, any>);
 	init(loggerFactory: LoggerFactory): void
