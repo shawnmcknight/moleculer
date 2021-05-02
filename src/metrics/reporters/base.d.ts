@@ -1,3 +1,5 @@
+import MetricRegistry from "../registry";
+
 export interface MetricReporterOptions {
 	includes?: string | Array<string>;
 	excludes?: string | Array<string>;

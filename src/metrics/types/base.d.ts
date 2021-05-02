@@ -1,3 +1,5 @@
+import MetricRegistry from "../registry";
+
 export interface BaseMetricOptions {
 	type: string;
 	name: string;
