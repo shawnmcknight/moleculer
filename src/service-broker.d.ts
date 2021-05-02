@@ -1,5 +1,6 @@
 import { MoleculerRepl } from "./addons/moleculerRepl";
 import AsyncStorage from "./async-storage";
+import Node from "./registry/node";
 import MetricRegistry from "./metrics/registry";
 
 declare class ServiceBroker {
@@ -92,7 +93,7 @@ declare class ServiceBroker {
 	ping(nodeID: string | Array<string>, timeout?: number): Promise<PongResponse>;
 
 	getHealthStatus(): NodeHealthStatus;
-	getLocalNodeInfo(): BrokerNode;
+	getLocalNodeInfo(): Node;
 
 	getCpuUsage(): Promise<any>;
 	generateUid(): string;

@@ -1,3 +1,5 @@
+import Node from "../node";
+
 export interface DiscovererOptions extends Record<string, any>  {
 	heartbeatInterval?: number;
 	heartbeatTimeout?: number;
@@ -10,7 +12,7 @@ declare abstract class BaseDiscoverer {
 	constructor(opts?:DiscovererOptions);
 
 	transit?: Transit;
-	localNode?: BrokerNode;
+	localNode?: Node;
 
 	heartbeatTimer: NodeJS.Timeout;
 	checkNodesTimer: NodeJS.Timeout;
@@ -26,10 +28,10 @@ declare abstract class BaseDiscoverer {
 	checkRemoteNodes(): void;
 	checkOfflineNodes(): void;
 	heartbeatReceived(nodeID:string, payload:Record<string, any>): void;
-	processRemoteNodeInfo(nodeID:string, payload:Record<string, any>): BrokerNode;
+	processRemoteNodeInfo(nodeID:string, payload:Record<string, any>): Node;
 	sendHeartbeat(): Promise<void>;
-	discoverNode(nodeID: string): Promise<BrokerNode | void>;
-	discoverAllNodes(): Promise<BrokerNode[] | void>;
+	discoverNode(nodeID: string): Promise<Node | void>;
+	discoverAllNodes(): Promise<Node[] | void>;
 	localNodeReady(): Promise<void>;
 	sendLocalNodeInfo(nodeID: string): Promise<void>;
 	localNodeDisconnected(): Promise<void>;
