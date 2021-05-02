@@ -72,14 +72,6 @@ export { Fastest as Validator } from "./src/validators"; // deprecated
  *   }
  */
 
-export interface LoggerBindings {
-	nodeID: string;
-	ns: string;
-	mod: string;
-	svc: string;
-	ver: string | void;
-}
-
 export type ActionHandler<T = any> = ((ctx: Context<any, any>) => Promise<T> | T) & ThisType<Service>;
 export type ActionParamSchema = { [key: string]: any };
 export type ActionParamTypes =
