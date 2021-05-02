@@ -1,7 +1,9 @@
+import { Logger } from "../logger-factory";
+
 declare class Registry {
 	broker: ServiceBroker;
 	metrics: MetricRegistry;
-	logger: LoggerInstance;
+	logger: Logger;
 
 	opts: BrokerRegistryOptions;
 

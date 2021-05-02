@@ -1,10 +1,11 @@
+import { Logger } from "../logger-factory";
 import Tracer from "./tracer";
 
 declare class Span {
 	constructor(tracer: Tracer, name: string, opts: Record<string, any>);
 
 	tracer: Tracer;
-	logger: LoggerInstance;
+	logger: Logger;
 	opts: Record<string, any>;
 	meta: Record<string, any>
 

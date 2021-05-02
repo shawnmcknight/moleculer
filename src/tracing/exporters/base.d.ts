@@ -1,10 +1,11 @@
+import { Logger } from "../../logger-factory";
 import Span from "../span";
 import Tracer from "../tracer";
 
 declare abstract class BaseTraceExporter {
 	opts: Record<string, any>;
 	tracer: Tracer;
-	logger: LoggerInstance;
+	logger: Logger;
 
 	constructor(opts: Record<string, any>);
 	init(tracer: Tracer): void;

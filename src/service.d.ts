@@ -1,3 +1,5 @@
+import { Logger } from "./logger-factory";
+
 declare class Service<S = ServiceSettingSchema> implements ServiceSchema {
 	constructor(broker: ServiceBroker, schema?: ServiceSchema<S>);
 
@@ -12,7 +14,7 @@ declare class Service<S = ServiceSettingSchema> implements ServiceSchema {
 	schema: ServiceSchema<S>;
 	originalSchema: ServiceSchema<S>;
 	broker: ServiceBroker;
-	logger: LoggerInstance;
+	logger: Logger;
 	actions: ServiceActions;
 	Promise: PromiseConstructorLike;
 	//currentContext: Context | null;
@@ -29,8 +31,7 @@ declare class Service<S = ServiceSettingSchema> implements ServiceSchema {
 	 * 						    are not available an error will be thrown. (In milliseconds)
 	 * @param interval The time we will wait before once again checking if the service(s) are available (In milliseconds)
 	 */
-	waitForServices(serviceNames: string | Array<string> | Array<ServiceDependency>, timeout?: number, interval?: number, logger?: LoggerInstance): Promise<WaitForServicesResult>;
-
+	waitForServices(serviceNames: string | Array<string> | Array<ServiceDependency>, timeout?: number, interval?: number, logger?: Logger): Promise<WaitForServicesResult>;
 
 	[name: string]: any;
 

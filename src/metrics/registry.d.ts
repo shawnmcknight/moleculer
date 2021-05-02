@@ -1,3 +1,5 @@
+import { Logger } from "../logger-factory";
+
 export interface MetricRegistryOptions {
 	enabled?: boolean;
 	collectProcessMetrics?: boolean;
@@ -12,7 +14,7 @@ export interface MetricRegistryOptions {
 
 declare class MetricRegistry {
 	broker: ServiceBroker;
-	logger: LoggerInstance;
+	logger: Logger;
 	dirty: boolean;
 	store: Map<String, BaseMetric>;
 	reporter: Array<MetricBaseReporter>;

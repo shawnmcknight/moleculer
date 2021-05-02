@@ -72,23 +72,12 @@ export { Fastest as Validator } from "./src/validators"; // deprecated
  *   }
  */
 
-export type LogLevels = "fatal" | "error" | "warn" | "info" | "debug" | "trace";
-
 export interface LoggerBindings {
 	nodeID: string;
 	ns: string;
 	mod: string;
 	svc: string;
 	ver: string | void;
-}
-
-export class LoggerInstance {
-	fatal(...args: any[]): void;
-	error(...args: any[]): void;
-	warn(...args: any[]): void;
-	info(...args: any[]): void;
-	debug(...args: any[]): void;
-	trace(...args: any[]): void;
 }
 
 export type ActionHandler<T = any> = ((ctx: Context<any, any>) => Promise<T> | T) & ThisType<Service>;

@@ -1,5 +1,6 @@
 import { MoleculerRepl } from "./addons/moleculerRepl";
 import AsyncStorage from "./async-storage";
+import { Logger } from "./logger-factory";
 import MetricRegistry from "./metrics/registry";
 import Registry from "./registry";
 import Node from "./registry/node";
@@ -20,7 +21,7 @@ declare class ServiceBroker {
 	nodeID: string;
 	instanceID: string;
 
-	logger: LoggerInstance;
+	logger: Logger;
 
 	services: Array<Service>;
 
@@ -55,7 +56,7 @@ declare class ServiceBroker {
 	isMetricsEnabled(): boolean;
 	isTracingEnabled(): boolean;
 
-	getLogger(module: string, props?: Record<string, any>): LoggerInstance;
+	getLogger(module: string, props?: Record<string, any>): Logger;
 	fatal(message: string, err?: Error, needExit?: boolean): void;
 
 	loadServices(folder?: string, fileMask?: string): number;
@@ -64,7 +65,7 @@ declare class ServiceBroker {
 	destroyService(service: Service | string | ServiceSearchObj): Promise<void>;
 
 	getLocalService(name: string | ServiceSearchObj): Service;
-	waitForServices(serviceNames: string | Array<string> | Array<ServiceSearchObj>, timeout?: number, interval?: number, logger?: LoggerInstance): Promise<void>;
+	waitForServices(serviceNames: string | Array<string> | Array<ServiceSearchObj>, timeout?: number, interval?: number, logger?: Logger): Promise<void>;
 
 	findNextActionEndpoint(actionName: string, opts?: Record<string, any>, ctx?: Context): ActionEndpoint | MoleculerRetryableError;
 

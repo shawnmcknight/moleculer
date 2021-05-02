@@ -1,8 +1,10 @@
+import { Logger } from "../logger-factory";
+
 declare class Tracer {
 	constructor(broker: ServiceBroker, opts: TracerOptions | boolean);
 
 	broker: ServiceBroker;
-	logger: LoggerInstance;
+	logger: Logger;
 	opts: Record<string, any>;
 
 	exporter: Array<BaseTraceExporter>;
