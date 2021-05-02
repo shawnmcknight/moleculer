@@ -1,3 +1,5 @@
+import { MoleculerRepl } from "./addons/moleculerRepl";
+
 declare class ServiceBroker {
 	constructor(options?: BrokerOptions);
 
@@ -37,7 +39,7 @@ declare class ServiceBroker {
 	start(): Promise<void>;
 	stop(): Promise<void>;
 
-	repl(): MoleculerRepl;
+	repl(): MoleculerRepl | undefined;
 
 	errorHandler(err: Error, info: Record<string, any>): void;
 
