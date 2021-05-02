@@ -1,3 +1,4 @@
+import { EventEmitter2 } from "eventemitter2";
 import { MoleculerRepl } from "./addons/moleculerRepl";
 import AsyncStorage from "./async-storage";
 import { NodeHealthStatus } from "./health";

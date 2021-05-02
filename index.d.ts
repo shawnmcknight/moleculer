@@ -1,4 +1,3 @@
-import { EventEmitter2 } from "eventemitter2";
 import Cachers from "./src/cachers";
 import Context from "./src/context";
 import { MoleculerError, MoleculerRetryableError } from "./src/errors";
