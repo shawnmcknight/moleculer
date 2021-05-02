@@ -92,10 +92,6 @@ export type ActionParamTypes =
 	| ActionParamSchema;
 export type ActionParams = { [key: string]: ActionParamTypes };
 
-export interface HotReloadOptions {
-	modules?: Array<string>;
-}
-
 export interface SpanLogEntry {
 	name: string;
 	fields: Record<string, any>;
@@ -360,76 +356,6 @@ export interface LogLevelConfig {
 export interface LoggerConfig {
 	type: string,
 	options?: Record<string, any>
-}
-
-export interface BrokerOptions {
-	namespace?: string;
-	nodeID?: string;
-
-	logger?: Loggers.Base | LoggerConfig | Array<LoggerConfig> | boolean;
-	logLevel?: LogLevels | LogLevelConfig;
-
-	transporter?: Transporter | string | Record<string, any>;
-	requestTimeout?: number;
-	retryPolicy?: RetryPolicyOptions;
-
-	contextParamsCloning?: boolean;
-	maxCallLevel?: number;
-	heartbeatInterval?: number;
-	heartbeatTimeout?: number
-
-	tracking?: BrokerTrackingOptions;
-
-	disableBalancer?: boolean;
-
-	registry?: BrokerRegistryOptions;
-
-	circuitBreaker?: BrokerCircuitBreakerOptions;
-
-	bulkhead?: BulkheadOptions;
-
-	transit?: BrokerTransitOptions;
-
-	uidGenerator?: () => string;
-
-	errorHandler?: (err: Error, info: any) => void;
-
-	cacher?: boolean | Cacher | string | Record<string, any>;
-	serializer?: Serializer | string | Record<string, any>;
-	validator?: boolean | BaseValidator | ValidatorNames | ValidatorOptions;
-
-	metrics?: boolean | MetricRegistryOptions;
-	tracing?: boolean | TracerOptions;
-
-	internalServices?: boolean | {
-		[key: string]: Partial<ServiceSchema>
-	};
-	internalMiddlewares?: boolean;
-
-	dependencyInterval?: number;
-
-	hotReload?: boolean | HotReloadOptions;
-
-	middlewares?: Array<Middleware | string>;
-
-	replCommands?: Array<Record<string, any>>;
-	replDelimiter?: string;
-
-	metadata?: Record<string, any>;
-
-	ServiceFactory?: typeof Service;
-	ContextFactory?: typeof Context;
-	Promise?: PromiseConstructorLike;
-
-	created?: (broker: ServiceBroker) => void;
-	started?: (broker: ServiceBroker) => void;
-	stopped?: (broker: ServiceBroker) => void;
-
-	/**
-	 * If true, process.on("beforeExit/exit/SIGINT/SIGTERM", ...) handler won't be registered!
-	 * You have to register this manually and stop broker in this case!
-	 */
-	skipProcessEventRegistration?: boolean;
 }
 
 export type FallbackHandler = (ctx: Context, err: MoleculerError) => Promise<any>;
