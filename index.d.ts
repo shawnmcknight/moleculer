@@ -502,26 +502,6 @@ export interface MCallDefinition<P extends Record<string, any> = Record<string, 
 	options?: CallingOptions;
 }
 
-export interface Endpoint {
-	broker: ServiceBroker;
-
-	id: string;
-	node: Record<string, any>;
-
-	local: boolean;
-	state: boolean;
-}
-
-export interface ActionEndpoint extends Endpoint {
-	service: Service;
-	action: ActionSchema;
-}
-
-export interface EventEndpoint extends Endpoint {
-	service: Service;
-	event: EventSchema;
-}
-
 export interface PongResponse {
 	nodeID: string;
 	elapsedTime: number;

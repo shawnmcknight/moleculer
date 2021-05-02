@@ -3,6 +3,8 @@ import AsyncStorage from "./async-storage";
 import { Logger } from "./logger-factory";
 import MetricRegistry from "./metrics/registry";
 import Registry from "./registry";
+import ActionEndpoint from "./registry/endpoint-action";
+import EventEndpoint from "./registry/endpoint-event";
 import Node from "./registry/node";
 import { Tracer } from "./tracing";
 

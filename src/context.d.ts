@@ -1,3 +1,5 @@
+import { Endpoint } from "./registry";
+
 declare class Context<P = unknown, M extends object = {}> {
 	constructor(broker: ServiceBroker, endpoint: Endpoint);
 	id: string;
