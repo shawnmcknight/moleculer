@@ -1,5 +1,6 @@
 import { MoleculerRepl } from "./addons/moleculerRepl";
 import AsyncStorage from "./async-storage";
+import { NodeHealthStatus } from "./health";
 import { Logger } from "./logger-factory";
 import MetricRegistry from "./metrics/registry";
 import Registry from "./registry";
