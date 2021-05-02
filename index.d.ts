@@ -60,7 +60,7 @@ export * as Utils from "./src/utils";
 export * as Validators from "./src/validators";
 export { Fastest as Validator } from "./src/validators"; // deprecated
 
-/**
+/*
  * Moleculer uses global.Promise as the default promise library
  * If you are using a third-party promise library (e.g. Bluebird), you will need to
  * assign export type definitions to use for your promise library.  You will need to have a .d.ts file
