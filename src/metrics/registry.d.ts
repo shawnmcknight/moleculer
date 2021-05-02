@@ -1,5 +1,16 @@
 import { Logger } from "../logger-factory";
 
+export interface MetricListOptions {
+	type: string | Array<string>;
+	includes: string | Array<string>;
+	excludes: string | Array<string>;
+}
+
+export interface MetricsReporterOptions {
+	type: string;
+	options?: MetricReporterOptions;
+}
+
 export interface MetricRegistryOptions {
 	enabled?: boolean;
 	collectProcessMetrics?: boolean;

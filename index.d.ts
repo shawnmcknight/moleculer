@@ -131,18 +131,7 @@ export interface TracingEventOptions extends TracingOptions {
 	tags?: TracingEventTags;
 }
 
-export interface MetricsReporterOptions {
-	type: string;
-	options?: MetricReporterOptions;
-}
-
 export type MetricSnapshot = GaugeMetricSnapshot | InfoMetricSnapshot | HistogramMetricSnapshot;
-
-export interface MetricListOptions {
-	type: string | Array<string>;
-	includes: string | Array<string>;
-	excludes: string | Array<string>;
-}
 
 export interface BulkheadOptions {
 	enabled?: boolean;
