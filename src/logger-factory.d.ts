@@ -1,6 +1,6 @@
 import ServiceBroker from "./service-broker";
 
-export class LoggerFactory {
+declare class LoggerFactory {
 	constructor(broker: ServiceBroker);
 	init(opts: LoggerConfig | Array<LoggerConfig>): void;
 	stop(): void;
@@ -9,3 +9,4 @@ export class LoggerFactory {
 
 	broker: ServiceBroker;
 }
+export default LoggerFactory;
