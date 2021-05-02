@@ -39,6 +39,8 @@ export {
 	InfoMetricSnapshot
 } from "./src/metrics/types";
 
+export { default as Registry } from "./src/registry";
+
 export * as Discoverers from "./src/registry/discoverers";
 
 export * as Serializers from "./src/serializers";
@@ -649,21 +651,4 @@ export interface ActionCatalogListOptions {
 	onlyAvailable?:boolean;
 	skipInternal?:boolean;
 	withEndpoints?:boolean;
-}
-
-export class ServiceRegistry {
-	broker: ServiceBroker;
-	metrics: MetricRegistry;
-	logger: LoggerInstance;
-
-	opts: BrokerRegistryOptions;
-
-	StrategyFactory: BaseStrategy;
-
-	nodes: any;
-	services: any;
-	actions: any;
-	events: any;
-
-	getServiceList(opts?: ActionCatalogListOptions): ServiceSchema[]
 }

@@ -1,4 +1,5 @@
 import Node from "../node";
+import Registry from "../registry";
 
 export interface DiscovererOptions extends Record<string, any>  {
 	heartbeatInterval?: number;
@@ -18,7 +19,7 @@ declare abstract class BaseDiscoverer {
 	checkNodesTimer: NodeJS.Timeout;
 	offlineTimer: NodeJS.Timeout;
 
-	init(registry: ServiceRegistry): void;
+	init(registry: Registry): void;
 
 	stop(): Promise<void>;
 	startHeartbeatTimers(): void;

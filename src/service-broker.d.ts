@@ -1,6 +1,7 @@
 import { MoleculerRepl } from "./addons/moleculerRepl";
 import AsyncStorage from "./async-storage";
 import MetricRegistry from "./metrics/registry";
+import Registry from "./registry";
 import Node from "./registry/node";
 import { Tracer } from "./tracing";
 
@@ -30,7 +31,7 @@ declare class ServiceBroker {
 
 	middlewares: MiddlewareHandler;
 
-	registry: ServiceRegistry;
+	registry: Registry;
 
 	cacher?: Cacher;
 	serializer?: Serializer;
