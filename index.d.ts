@@ -307,15 +307,6 @@ export interface WaitForServicesResult {
 
 export type CheckRetryable = (err: Error) => boolean;
 
-export interface BrokerCircuitBreakerOptions {
-	enabled?: boolean,
-	threshold?: number;
-	windowTime?: number;
-	minRequestCount?: number;
-	halfOpenTime?: number;
-	check?: CheckRetryable;
-}
-
 export interface RetryPolicyOptions {
 	enabled?: boolean,
 	retries?: number;
@@ -335,18 +326,6 @@ export interface BrokerRegistryOptions {
 export interface RegistryDiscovererOptions {
 	type: string,
 	options: DiscovererOptions
-}
-
-export interface BrokerTransitOptions {
-	maxQueueSize?: number;
-	disableReconnect?: boolean;
-	disableVersionCheck?: boolean;
-	maxChunkSize?: number;
-}
-
-export interface BrokerTrackingOptions {
-	enabled?: boolean;
-	shutdownTimeout?: number;
 }
 
 export interface LogLevelConfig {

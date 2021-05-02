@@ -2,6 +2,7 @@ import { EventEmitter2 } from "eventemitter2";
 import { MoleculerRepl } from "./addons/moleculerRepl";
 import AsyncStorage from "./async-storage";
 import { NodeHealthStatus } from "./health";
+import { CircuitBreakerOptions } from "./interfaces";
 import { Logger } from "./logger-factory";
 import MetricRegistry from "./metrics/registry";
 import Registry from "./registry";
@@ -12,6 +13,18 @@ import { Tracer } from "./tracing";
 
 export interface BrokerHotReloadOptions {
 	modules?: Array<string>;
+}
+
+export interface BrokerTrackingOptions {
+	enabled?: boolean;
+	shutdownTimeout?: number;
+}
+
+export interface BrokerTransitOptions {
+	maxQueueSize?: number;
+	disableReconnect?: boolean;
+	disableVersionCheck?: boolean;
+	maxChunkSize?: number;
 }
 
 export interface BrokerOptions {
@@ -36,7 +49,7 @@ export interface BrokerOptions {
 
 	registry?: BrokerRegistryOptions;
 
-	circuitBreaker?: BrokerCircuitBreakerOptions;
+	circuitBreaker?: CircuitBreakerOptions;
 
 	bulkhead?: BulkheadOptions;
 
