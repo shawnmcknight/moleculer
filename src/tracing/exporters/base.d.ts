@@ -1,3 +1,6 @@
+import Span from "../span";
+import Tracer from "../tracer";
+
 declare abstract class BaseTraceExporter {
 	opts: Record<string, any>;
 	tracer: Tracer;

@@ -1,7 +1,8 @@
 import { MoleculerRepl } from "./addons/moleculerRepl";
 import AsyncStorage from "./async-storage";
-import Node from "./registry/node";
 import MetricRegistry from "./metrics/registry";
+import Node from "./registry/node";
+import { Tracer } from "./tracing";
 
 declare class ServiceBroker {
 	constructor(options?: BrokerOptions);

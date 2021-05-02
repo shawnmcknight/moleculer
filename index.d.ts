@@ -142,68 +142,11 @@ export interface TracerOptions {
 	}
 }
 
-export class Tracer {
-	constructor(broker: ServiceBroker, opts: TracerOptions | boolean);
-
-	broker: ServiceBroker;
-	logger: LoggerInstance;
-	opts: Record<string, any>;
-
-	exporter: Array<BaseTraceExporter>;
-
-	isEnabled(): boolean;
-	shouldSample(span: Span): boolean;
-
-	startSpan(name: string, opts?: Record<string, any>): Span;
-
-	//getCurrentSpan(): Span | null;
-	getCurrentTraceID(): string | null;
-	getActiveSpanID(): string | null;
-}
-
 export interface SpanLogEntry {
 	name: string;
 	fields: Record<string, any>;
 	time: number;
 	elapsed: number;
-}
-
-export class Span {
-	constructor(tracer: Tracer, name: string, opts: Record<string, any>);
-
-	tracer: Tracer;
-	logger: LoggerInstance;
-	opts: Record<string, any>;
-	meta: Record<string, any>
-
-	name: string;
-	id: string;
-	traceID: string;
-	parentID: string | null;
-
-	service?: {
-		name: string;
-		version: string | number | null | undefined;
-	}
-
-	priority: number;
-	sampled: boolean;
-
-	startTime: number | null;
-	finishTime: number | null;
-	duration: number | null;
-
-	error: Error | null;
-
-	logs: Array<SpanLogEntry>;
-	tags: Record<string, any>;
-
-	start(time?: number): Span;
-	addTags(obj: Record<string, any>): Span;
-	log(name: string, fields?: Record<string, any>, time?: number): Span;
-	setError(err: Error): Span;
-	finish(time?: number): Span;
-	startSpan(name: string, opts?: Record<string, any>): Span;
 }
 
 export type TracingActionTagsFuncType = (ctx: Context, response?: any) => Record<string, any>;
